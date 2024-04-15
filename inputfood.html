@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title%}Calorie Tracker Page{% endblock %}
+
+{% block content %}
+<form action="#" method='post'>
+    <p>Food: <input type='text' name='nm'></p>
+    <p>Protein (g): <input type='text' value = 0 placeholder = 'please enter value' name='protein'></p>
+    <p>Carbohydrates (g): <input type='text' value = 0 placeholder = 'please enter value' name='carbs'></p>
+    <p>Fats (g): <input type='text' value = 0 placeholder = 'please enter value' name='fats'></p>
+    <p>Servings: <input type='text' value = 0 placeholder = 'please enter value' name ='servings'></p>
+    <p><input type='submit' value='submit'></p>
+</form>
+{% endblock %}

@@ -1,3 +1,4 @@
+# create class to handle variables
 class Nutrition:
     def __init__(self, name, fat, carb, protein, servings):
         self.name = name
@@ -9,28 +10,36 @@ class Nutrition:
     def cals(self):
         return (int(self.fat) * 9 + int(self.carb) * 4 + int(self.protein) * 4) * int(self.servings)
     
-def check(n):
-        try:
-             n = int(n)
-        except:
-            print('please use only numbers.')
 
+# create function to check for appropriate responses
+macros = []   
+def check(macro):
+        while True:
+            n = input(f"How many grams of {macro} did you consume?\n")
+            try:
+                  macros.append(int(n))
+                  break
+            except:
+                print('Please only use whole numbers!')
+
+# initialize final list and calories       
 calories = 0
 lst = []
+
+# create loop to continuously ask for inputs of foods and macros
 while True:
-    name = input('food\n')
-    f = int(input('How many grams of FAT are there per serving?\n'))
-    check(f)
-    c = input('How many grams of CARBS are there per serving?\n')
-    check(c)
-    p = input('How many grams of PROTEIN are there per serving?\n')
-    check(p)
+    name = input('\nWhat item of food did you eat?\n(enter "done" to end)\n')
+    if name == 'done':
+         break
+    check('fat')
+    check('carbs')
+    check('protein')
     s = int(input('how many servings did you have?\n'))
-    food = Nutrition(name, f, c, p, s)
+    food = Nutrition(name, macros[0], macros[1], macros[2], s)
     lst.append(food)
-    print('Press enter for next food, type "done" to end.')
-    if input().lower() == 'done':
-        break
+
+# figure out total calories and macros
 for x in lst:
+    print(x.name)
     calories = calories + x.cals()
-print(calories)
+print('Total Calories: ' + str(calories))

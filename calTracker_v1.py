@@ -1,3 +1,7 @@
+from flask import redirect, Flask, url_for, render_template
+
+app = Flask(__name__)
+
 master_dict = {}
 
 total_fat = 0
@@ -62,14 +66,19 @@ total_fat = total_fat * 9
 total_carbs = total_carbs * 4
 total_pro = total_pro * 4
 total_cal = total_fat + total_carbs + total_pro
-print('Total Calories: {0}'.format(total_cal))
-print('Intake Percentages:\nFat {0}% Carbs {1}% Protein {2}%'.format((total_fat / total_cal)*100, (total_carbs / total_cal)*100, (total_pro / total_cal)*100))
+print(total_cal)
+keys = []
+for k in master_dict.keys():
+    keys.append(k)
 
 
+@app.route('/<name>')
+def home(name):
+    return render_template('index.html', total_calories = total_cal, total_protein = total_pro, total_carbohydrates = total_carbs, total_lipids = total_fat)
 
-# add way to check if already in dictionary
-    
-    
+@app.route('/foods')
+def foods():
+    return render_template('foods.html', foods = keys)
 
-
-    
+if __name__ == '__main__':
+    app.run(debug = True)
